@@ -243,7 +243,7 @@ const ChatBox = ({ setChatBoxOpen, ChatBoxOpen, setRoboButton }) => {
           className="outline-none w-full text-base font-normal bg-transparent text-gray-900 placeholder-gray-500 appearance-none"
           placeholder="Ask something?"
         />
-        <button onClick={handleSendMessage}>
+        <button onClick={handleSendMessage} className="bg-white text-gray-700 px-3 py-2 rounded-md">
           <i className="ri-send-plane-2-line text-gray-700 text-xl"></i>
         </button>
       </div>
@@ -546,13 +546,13 @@ export default function GGVHome() {
           </div>
 
           {/* Slide dots */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 bg-black/20 px-3 py-1 rounded-full">
+          <div className="absolute bottom-4 left-1/2  -translate-x-1/2 flex gap-2 bg-black/15 px-3 py-1 rounded-full">
             {SLIDES.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setActive(i)}
-                className={`h-2.5 rounded-full transition-all duration-300 ${
-                  i === active ? "bg-white w-8" : "bg-white/60 w-2.5"
+                className={` rounded-full transition-all duration-300 ${
+                  i === active ? "bg-white h-1.5 w-4" : "bg-white/60 h-1.5 w-1.5"
                 }`}
                 aria-label={`Go to slide ${i + 1}`}
               />
