@@ -2,7 +2,7 @@ import React from "react";
 
 const ChatHeader = ({ setChatBoxOpen, setRoboButton }) => {
   return (
-    <div className="bg-white rounded-t-3xl">
+    <div className="bg-white rounded-t-3xl relative z-[10001]">
       <div className="text-black px-4  py-3 border-b-2 ">
         <div className="flex justify-between px-2">
           <div className=" flex gap-2">

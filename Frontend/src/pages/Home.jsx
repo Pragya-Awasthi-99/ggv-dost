@@ -80,14 +80,14 @@ const ChatHeader = ({ setChatBoxOpen, setRoboButton }) => {
    Handles messages, API calls, typing UI */
 const ChatBox = ({ setChatBoxOpen, ChatBoxOpen, setRoboButton }) => {
   // User input text
-  const [question, setQuestion] = useState("")
+  const [question, setQuestion] = useState("");
   const [messages, setMessages] = useState([]);
   const [typingDone, setTypingDone] = useState(false);
   const [loading, setLoading] = useState(false);
   const scrollToAns = useRef();
 
   /* -------- TEXT FORMATTER -------- */
-  
+
   const formatText = (text) => {
     return text.split("\n").map((line, i) => {
       const boldMatch = line.match(/^\s*[•*]\s*\*\*(.+?):\*\*\s*(.*)/);
@@ -164,6 +164,7 @@ const ChatBox = ({ setChatBoxOpen, ChatBoxOpen, setRoboButton }) => {
         }
       }, 500);
     } catch (err) {
+      console.error(err);
       setLoading(false);
 
       // Error fallback message
@@ -175,7 +176,7 @@ const ChatBox = ({ setChatBoxOpen, ChatBoxOpen, setRoboButton }) => {
   };
 
   return (
-    <div className="fixed bottom-[13%] right-8 w-80 bg-gray-200 h-4/5 rounded-3xl">
+    <div className="fixed bottom-[13%] right-8 w-80 bg-gray-200 h-4/5 rounded-3xl z-[10000]">
       <ChatHeader
         setRoboButton={setRoboButton}
         setChatBoxOpen={setChatBoxOpen}
@@ -299,7 +300,7 @@ export default function GGVHome() {
 
       {/*  HEADER  */}
       <header
-        className="relative bg-white border-b border-gray-300 overflow-hidden"
+        className="relative bg-white border-b border-gray-300 py-3"
         style={{ height: window.innerWidth >= 768 ? "110px" : "auto" }}
       >
         <div className="max-w-7xl mx-auto px-4 h-full flex flex-wrap justify-between gap-8">
@@ -309,11 +310,11 @@ export default function GGVHome() {
               src="/images/logo.png"
               alt="GGV Logo"
               style={{
-                height: "120px",
-                width: "120px",
+                height: window.innerWidth < 768 ? "70px" : "120px",
+                width: window.innerWidth < 768 ? "70px" : "120px",
                 objectFit: "contain",
-                paddingLeft: "0px",
-                marginTop: "-10px",
+                paddingLeft: window.innerWidth < 768 ? "0" : "50px",
+                margin: "0 auto",
               }}
             />
           </div>
@@ -403,24 +404,30 @@ export default function GGVHome() {
         {/* RIGHT SIDE BADGES / IMAGES */}
         <div
           style={{
-            position: window.innerWidth < 768 ? "static" : "absolute",
-            right: window.innerWidth < 768 ? "auto" : "10px",
-            top: window.innerWidth < 768 ? "auto" : "50%",
-            transform:
-              window.innerWidth < 768 ? "none" : "translateY(-50%) scale(0.4)",
+            position: "static",
             display: "flex",
             justifyContent: "center",
-            gap: "12px",
-            marginTop: window.innerWidth < 768 ? "8px" : "0",
+            alignItems: "center",
+            gap: window.innerWidth < 768 ? "10px" : "12px",
+            marginTop: "10px",
+            flexWrap: "wrap",
           }}
         >
           <img
             src="/images/babaji.png"
-            style={{ height: "150px" }}
+            style={{ height: window.innerWidth < 768 ? "60px" : "150px" }}
             alt="Babaji"
           />
-          <img src="/images/NAACA.png" style={{ height: "150px" }} alt="NAAC" />
-          <img src="/images/vba.png" style={{ height: "150px" }} alt="VBA" />
+          <img
+            src="/images/NAACA.png"
+            style={{ height: window.innerWidth < 768 ? "60px" : "150px" }}
+            alt="NAAC"
+          />
+          <img
+            src="/images/vba.png"
+            style={{ height: window.innerWidth < 768 ? "60px" : "150px" }}
+            alt="VBA"
+          />
         </div>
       </header>
 
@@ -428,7 +435,7 @@ export default function GGVHome() {
       {isMobile ? (
         /*  MOBILE NAVBAR  */
         <nav
-          className="sticky top-0 z-50"
+          className="sticky top-0 z-40"
           style={{ backgroundColor: "#1e5a73" }}
         >
           {/* Hamburger button */}
@@ -474,7 +481,7 @@ export default function GGVHome() {
       ) : (
         /*  DESKTOP NAVBAR  */
         <nav
-          className="sticky top-0 z-50 border-b border-gray-300"
+          className="sticky top-0 z-40 border-b border-gray-300"
           style={{ backgroundColor: "#1e5a73" }}
         >
           <div className="max-w-7xl mx-auto">
@@ -718,7 +725,7 @@ export default function GGVHome() {
               overflow: "hidden",
               boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
               backgroundImage: "url('/images/mid.png')",
-              backgroundSize: "cover",
+              backgroundSize: "contain",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
             }}
@@ -732,7 +739,7 @@ export default function GGVHome() {
               minHeight: "420px",
               overflow: "hidden",
               backgroundImage: "url('/images/mid1.png')",
-              backgroundSize: "cover",
+              backgroundSize: "contain",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
             }}
@@ -747,7 +754,7 @@ export default function GGVHome() {
             minHeight: "300px",
             overflow: "hidden",
             backgroundImage: "url('/images/mid3.png')",
-            backgroundSize: "cover",
+            backgroundSize: "contain",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
           }}

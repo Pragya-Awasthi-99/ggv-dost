@@ -3,7 +3,7 @@ import ChatHeader from "./ChatHeader";
 
 const ChatBox = ({ setChatBoxOpen, ChatBoxOpen, setRoboButton }) => {
   const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState([]);
+  // const [answer, setAnswer] = useState([]);
   const [messages, setMessages] = useState([]);
   const [typingDone, setTypingDone] = useState(false);
 
@@ -77,6 +77,7 @@ const ChatBox = ({ setChatBoxOpen, ChatBoxOpen, setRoboButton }) => {
         scrollToAns.current.scrollTop = scrollToAns.current.scrollHeight;
       }, 500);
     } catch (err) {
+      console.error(err);
       setLoading(false);
       setMessages((prev) => [
         ...prev,
