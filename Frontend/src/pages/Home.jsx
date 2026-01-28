@@ -230,7 +230,7 @@ const ChatBox = ({ setChatBoxOpen, ChatBoxOpen, setRoboButton }) => {
       </div>
 
       {/* Input box */}
-      <div className="text-black absolute bottom-6 bg-white border-2 border-gray-500 w-[92%] flex justify-between ml-4 py-1 px-4 rounded-xl focus-within:border-[3px] focus-within:border-purple-600 transition-all duration-200">
+      <div className="text-black absolute bottom-6 bg-white/95 border-2 border-gray-500 w-[92%] flex justify-between ml-4 py-1 px-4 rounded-xl focus-within:border-[3px] focus-within:border-purple-600 transition-all duration-200">
         <input
           type="text"
           value={question}
@@ -240,7 +240,7 @@ const ChatBox = ({ setChatBoxOpen, ChatBoxOpen, setRoboButton }) => {
               handleSendMessage();
             }
           }}
-          className="outline-none w-full text-base font-normal text-gray-900"
+          className="outline-none w-full text-base font-normal bg-transparent text-gray-900 placeholder-gray-500 appearance-none"
           placeholder="Ask something?"
         />
         <button onClick={handleSendMessage}>
@@ -300,7 +300,7 @@ export default function GGVHome() {
 
       {/*  HEADER  */}
       <header
-        className="relative bg-white border-b border-gray-300 py-3"
+        className="relative bg-white border-b border-gray-300 py-2 md:py-3"
         style={{ height: window.innerWidth >= 768 ? "110px" : "auto" }}
       >
         <div className="max-w-7xl mx-auto px-4 h-full flex flex-wrap justify-between gap-8">
@@ -326,7 +326,7 @@ export default function GGVHome() {
                 fontFamily: "Noto Sans Devanagari, serif",
                 fontSize: "20px",
                 fontWeight: 800,
-                lineHeight: "1.15",
+                lineHeight: window.innerWidth < 768 ? "1.2" : "1.4",
                 marginBottom: "8px",
                 color: "#1f2937",
                 marginTop: "10px",
@@ -339,7 +339,7 @@ export default function GGVHome() {
               style={{
                 fontSize: "12px",
                 fontWeight: 500,
-                lineHeight: "0.5",
+                lineHeight: window.innerWidth < 768 ? "1.2" : "1.5",
                 marginBottom: "8px",
                 color: "#374151",
               }}
@@ -352,7 +352,7 @@ export default function GGVHome() {
               style={{
                 fontSize: "20px",
                 fontWeight: 800,
-                lineHeight: "0.5",
+                lineHeight: window.innerWidth < 768 ? "1.2" : "1.4",
                 marginBottom: "8px",
                 color: "#1f2937",
               }}
@@ -364,7 +364,7 @@ export default function GGVHome() {
               style={{
                 fontSize: "11.5px",
                 fontWeight: 500,
-                lineHeight: "1.15",
+                lineHeight: window.innerWidth < 768 ? "1.2" : "1.5",
                 marginBottom: "4px",
                 color: "#4b5563",
               }}
@@ -415,17 +415,17 @@ export default function GGVHome() {
         >
           <img
             src="/images/babaji.png"
-            style={{ height: window.innerWidth < 768 ? "60px" : "150px" }}
+            style={{ height: window.innerWidth < 768 ? "50px" : "150px" }}
             alt="Babaji"
           />
           <img
             src="/images/NAACA.png"
-            style={{ height: window.innerWidth < 768 ? "60px" : "150px" }}
+            style={{ height: window.innerWidth < 768 ? "50px" : "150px" }}
             alt="NAAC"
           />
           <img
             src="/images/vba.png"
-            style={{ height: window.innerWidth < 768 ? "60px" : "150px" }}
+            style={{ height: window.innerWidth < 768 ? "50px" : "150px" }}
             alt="VBA"
           />
         </div>
@@ -546,7 +546,7 @@ export default function GGVHome() {
           </div>
 
           {/* Slide dots */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 bg-black/20 px-3 py-1 rounded-full">
             {SLIDES.map((_, i) => (
               <button
                 key={i}
