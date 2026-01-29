@@ -139,7 +139,7 @@ const ChatBox = ({ setChatBoxOpen, ChatBoxOpen, setRoboButton }) => {
     try {
       // Send user query to FastAPI backend
       const res = await fetch(
-        "https://fast-api-backend-j3dy.onrender.com/ask",
+        "https://fastapi-dost-581010234750.asia-south1.run.app/ask",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
