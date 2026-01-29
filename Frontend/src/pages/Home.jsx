@@ -88,37 +88,71 @@ const ChatBox = ({ setChatBoxOpen, ChatBoxOpen, setRoboButton }) => {
 
   /* -------- TEXT FORMATTER -------- */
 
-  const formatText = (text) => {
-    return text.split("\n").map((line, i) => {
-      const boldMatch = line.match(/^\s*[•*]\s*\*\*(.+?):\*\*\s*(.*)/);
+  const URL_REGEX = /(https?:\/\/[^\s]+)/g;
 
-      if (boldMatch) {
-        return (
-          <div key={i} className="mt-2">
-            <span className="font-bold">{boldMatch[1]}:</span>{" "}
-            <span>{boldMatch[2]}</span>
-          </div>
-        );
-      }
-
-      if (line.startsWith("* ") || line.startsWith("• ")) {
-        return (
-          <div key={i} className="ml-3">
-            • {line.replace(/^(\*|•)\s*/, "")}
-          </div>
-        );
-      }
+const formatText = (text) => {
+  return text.split("\n").map((line, i) => {
+    // Section headings like **Title:**
+    const boldMatch = line.match(/^\s*[•*]\s*\*\*(.+?):\*\*\s*(.*)/);
+    if (boldMatch) {
+      return (
+        <div key={i} className="mt-3">
+          <span className="font-semibold text-gray-800">
+            {boldMatch[1]}:
+          </span>{" "}
+          <span>{boldMatch[2]}</span>
+        </div>
+      );
+    }
+    // bullet points
 
       if (/^\s*[*•]\s+/.test(line)) {
-        return (
-          <div key={i} className="ml-4 flex gap-2">
-            <span>•</span> <span>{line.replace(/^\s*[*•]\s+/, "")}</span>
-          </div>
-        );
-      }
+      return (
+        <div key={i} className="ml-4 flex gap-2">
+          <span>•</span>
+          <span>{renderWithLinks(line.replace(/^\s*[*•]\s+/, ""))}</span>
+        </div>
+      );
+    }
+    // Make "Source:" bold
+if (line.trim().toLowerCase() === "source:") {
+  return (
+    <div key={i} className="mt-3 font-semibold text-gray-800">
+      Source:
+    </div>
+  );
+}
 
-      return <div key={i}>{line}</div>;
-    });
+    // Lines containing URLs
+    if (URL_REGEX.test(line)) {
+      return (
+        <div key={i} className="mt-1">
+          {renderWithLinks(line)}
+        </div>
+      );
+    }
+
+      // Normal text
+    return <div key={i}>{line}</div>;
+  });
+};
+
+const renderWithLinks = (text) => {
+  return text.split(URL_REGEX).map((part, idx) =>
+    URL_REGEX.test(part) ? (
+      <a
+        key={idx}
+        href={part}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline break-all"
+      >
+        {part}
+      </a>
+    ) : (
+      <span key={idx}>{part}</span>
+    )
+    );
   };
 
   /*  SEND MESSAGE HANDLER  */
